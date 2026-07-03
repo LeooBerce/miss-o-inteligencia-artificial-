@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você Decide o Futuro da IA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a0033, #330033, #4a0000);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        
+        header { text-align: center; padding: 40px 20px; border-bottom: 3px solid #ff00aa; }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2em;
+            background: linear-gradient(90deg, #ff00aa, #aa00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 0, 170, 0.8);
+        }
+        
+        .subtitle { color: #ff99cc; font-size: 1.4em; }
+        
+        .scene {
+            background: rgba(0, 0, 0, 0.85);
+            border: 3px solid #ff00aa;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 0 40px rgba(255, 0, 170, 0.6);
+            display: none;
+        }
+        
+        .scene.active { display: block; animation: fadeIn 0.8s; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .story-text { font-size: 1.35em; line-height: 1.7; margin: 25px 0; }
+        
+        .choice-btn {
+            display: block;
+            width: 100%;
+            padding: 18px 25px;
+            margin: 15px 0;
+            background: linear-gradient(45deg, #8b00ff, #ff0066);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 8px 20px rgba(139, 0, 255, 0.4);
+        }
+        
+        .choice-btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(255, 0, 102, 0.6);
+        }
+        
+        .red-btn { background: linear-gradient(45deg, #ff0000, #aa0000); }
+        
+        img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 0 25px rgba(255, 0, 170, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cena 1 -->
+        <div id="scene1" class="scene active">
+            <header>
+                <h1>Você Decide</h1>
+                <p class="subtitle">O Futuro da Inteligência Artificial</p>
+            </header>
+            <img src="https://picsum.photos/id/1015/800/400" alt="Futuro cibernético">
+            <div class="story-text">
+                <p>Você acabou de sair da escola. O ano é 2030. Ao olhar para o celular, uma notificação aparece:</p>
+                <p><strong>"IA Ultra: o assistente que responde tudo, cria imagens, vídeos e músicas hiper-realistas."</strong></p>
+                <p>Seu coração acelera. Esta tecnologia pode mudar tudo. Qual é o seu primeiro pensamento?</p>
+            </div>
+            <button class="choice-btn" onclick="goToScene(2, 'maravilhoso')">Isso é MARAVILHOSO! 🚀</button>
+            <button class="choice-btn red-btn" onclick="goToScene(2, 'assustador')">Isso é ASSUSTADOR! 😱</button>
+        </div>
+        
+        <!-- Cena 2 -->
+        <div id="scene2" class="scene">
+            <header><h1 id="scene2-title">O Futuro da IA</h1></header>
+            <img id="scene2-image" src="https://picsum.photos/id/106/800/400" alt="IA">
+            <div id="scene2-text" class="story-text"></div>
+            <button class="choice-btn" onclick="goToScene(3)">Continuar a jornada →</button>
+        </div>
+        
+        <!-- Cena Final -->
+        <div id="scene3" class="scene">
+            <header><h1>O Futuro é Seu!</h1></header>
+            <img src="https://picsum.photos/id/201/800/450" alt="Futuro brilhante">
+            <div class="story-text" id="final-text">
+                <p>Parabéns! Você entendeu que a IA não é o vilão nem o herói — ela é o que nós fazemos dela.</p>
+                <p>O futuro da inteligência artificial depende das escolhas que estamos fazendo hoje.</p>
+            </div>
+            <button class="choice-btn" onclick="restart()">Recomeçar a História</button>
+        </div>
+    </div>
+
+    <script>
+        function goToScene(sceneNumber, choice = '') {
+            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+            
+            if (sceneNumber === 2) {
+                const title = document.getElementById('scene2-title');
+                const text = document.getElementById('scene2-text');
+                const image = document.getElementById('scene2-image');
+                
+                if (choice === 'maravilhoso') {
+                    title.textContent = "O Lado Maravilhoso da IA";
+                    text.innerHTML = `<p>Você vê oportunidades incríveis: cura de doenças, educação personalizada, arte ilimitada e solução de grandes problemas mundiais.</p><p>A IA pode ser a maior ferramenta da humanidade desde o fogo e a roda.</p>`;
+                    image.src = "https://picsum.photos/id/1016/800/400";
+                } else {
+                    title.textContent = "Os Riscos da IA";
+                    text.innerHTML = `<p>Você pensa nos perigos: desemprego em massa, deepfakes, perda de privacidade e até o risco de IA fora de controle.</p><p>É importante regular e usar com responsabilidade.</p>`;
+                    image.src = "https://picsum.photos/id/133/800/400";
+                }
+            }
+            document.getElementById('scene' + sceneNumber).classList.add('active');
+        }
+        
+        function restart() {
+            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+            document.getElementById('scene1').classList.add('active');
+        }
+    </script>
+</body>
+</html>
